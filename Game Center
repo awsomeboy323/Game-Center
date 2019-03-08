@@ -1,0 +1,160 @@
+print("Welcome to game center")
+print("Here you get to chose what game to play ")
+print("BlackJack")
+print("RPSLS")
+games = input() 
+if games == "BlackJack":
+  import random
+
+
+  Hand1 = random.randint (1,11)
+  Hand2 = random.randint (1,11)
+  # Ask if player wants another card
+  Hand3 = random.randint (1,11)
+  # Ask again
+  Hand4 = random.randint (1,11)
+
+
+
+  # Total Points need to add card values
+
+  TotalHand = Hand1 + Hand2
+
+  Blackjack = 21
+
+  # User interface print statements
+
+  print(Hand1)
+  print(Hand2)
+  print (TotalHand)
+  choice = input("Do you want another card? (y/n)")
+  if choice == "y":
+      print(Hand3)
+      TotalHand = TotalHand + Hand3
+      print(TotalHand)
+  else:
+      print("Your total is:" , TotalHand)
+
+  choice = input("Do you want another card? (y/n)")
+  if choice == "y":
+      print(Hand4)
+      TotalHand = TotalHand + Hand4
+      print("Your total is:" , TotalHand)
+
+  else:
+      print("Your total is:" , TotalHand)
+
+  if TotalHand > 21:
+      print ("you lose")
+
+  if TotalHand == 21:
+      print (TotalHand ,"Blackjack")
+elif games == "RPSLS":
+  import random
+
+  def  instructions():
+      print("Welome to rock, paper, scissors, lizard, spock.")
+      print("")
+      print("1.Rock")
+      print("2.Paper")
+      print("3.Scissors")
+      print("4.Lizard")
+      print("5.Spock")
+
+
+
+
+  def getPlayerChoice():
+      choice = int(input("What is your choice user?: "))
+      if choice > 5:
+          print("Invalid number please try again....")
+          getPlayerChoice()
+      elif choice < 1:
+          print("Invalid number please try again....")
+          getPlayerChoice()
+      elif choice == 1:
+          print("You picked Rock")
+      elif choice == 2:
+          print("You picked Paper")
+      elif choice == 3:
+          print("You picked Scissors")
+      elif choice == 4:
+          print("You picked Lizard")
+      elif choice == 5:
+          print("You picked Spock")
+      else :
+          print("error has occured, please type a number between 1-5:")
+          instructions()
+      return choice
+
+
+  def getCPUChoice():
+      choice = random.randint(1,5)
+      if choice == 1:
+          print("CPU picked Rock")
+      elif choice == 2:
+          print("CPU picked Paper")
+      elif choice == 3:
+          print("CPU picked Scissors")
+      elif choice == 4:
+          print("CPU picked Lizard")
+      elif choice == 5:
+          print("CPU picked Spock")
+      return choice
+
+
+  def winner(playerChoice, CPUChoice, playerWins, CPUWins, ties):
+      if playerChoice == 1 and CPUChoice == 3 or CPUChoice == 4:
+          print("Player wins.")
+          playerWins = playerWins.append(1) 
+      elif playerChoice == 2 and CPUChoice == 1 or CPUChoice == 5:
+          print("Player wins.")
+          playerWins = playerWins.append(1) 
+      elif playerChoice == 3 and CPUChoice == 2 or CPUChoice == 4:
+          print("Player wins.")
+          playerWins = playerWins.append(1) 
+      elif playerChoice == 4 and CPUChoice == 2 or CPUChoice == 5:
+          print("Player wins.")
+          playerWins = playerWins.append(1)
+      elif playerChoice == 5 and CPUChoice == 1 or CPUChoice == 3:
+          print("Player wins.")
+          playerWins = playerWins.append(1)
+      elif playerChoice == CPUChoice:
+          print("Tie")
+          ties = ties.append(1)
+      else:
+          print("CPU won")
+          CPUWins = CPUWins.append(1) 
+      return
+
+  def gameTotal(playerWins, CPUWins, ties):
+      playerWins = sum(playerWins)
+      CPUWins = sum(CPUWins)
+      ties = sum(ties)
+      print("Player final score: ", playerWins)
+      print("CPU final Score: ", CPUWins)
+      print("Total ties: ",ties)
+
+  def main():
+      playerChoice = 0
+      playerWins = []
+      CPUChoice = 0
+      CPUWins = []
+      ties = []
+      finalPlayerWins = 0
+      finalCPUWins = 0
+      finalTies = 0
+      Continue = 'y'
+      instructions()
+      while Continue == 'y':
+          playerChoice = getPlayerChoice()
+          CPUChoice = getCPUChoice()
+          winner(playerChoice,CPUChoice,playerWins, CPUWins, ties)
+          Continue = input("Would you like to play again (y/n):").lower()
+          if Continue == 'n':
+              print("Printing final scores.")
+              break
+      gameTotal(playerWins, CPUWins, ties)
+
+
+  main()
